@@ -1,0 +1,49 @@
+{% extends 'grocery/shared/base.html' %}
+{% block site-content %}
+    <!-- Page Content-->
+    <section class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Our Work</h1>
+                <p class="lead fw-normal text-muted mb-0">Company portfolio</p>
+            </div>
+            {% if products %}
+                <div class="row gx-5">
+                    {% for product in products %}
+                        <div class="col-md-3">
+
+                            <div class="position-relative mb-5">
+                                <img class="img-fluid rounded-3 mb-3"
+                                     src="{{ product.image.url }}"
+                                     alt="..."/>
+                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">
+                                    {{ product.name }}
+                                    {{ product.price }}
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">
+                                            Add to basket
+                                        </a>
+                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">
+                                            Add to basket
+                                        </a>
+                                    </div>
+
+
+                                </a>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h2>No Product TODO</h2>
+            {% endif %}
+        </div>
+    </section>
+    <section class="py-5 bg-light">
+        <div class="container px-5 my-5">
+            <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
+            <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
+        </div>
+    </section>
+{% endblock %}
