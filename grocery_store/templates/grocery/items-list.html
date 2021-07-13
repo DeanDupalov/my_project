@@ -16,20 +16,20 @@
                                 <img class="img-fluid rounded-3 mb-3"
                                      src="{{ product.image.url }}"
                                      alt="..."/>
-                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">
-                                    {{ product.name }}
-                                    {{ product.price }}
-                                    <div class="d-grid gap-2 d-md-block">
-                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">
-                                            Add to basket
-                                        </a>
-                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">
-                                            Add to basket
-                                        </a>
-                                    </div>
-
-
-                                </a>
+{#                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">#}
+{#                                    {{ product.name }}#}
+{#                                    {{ product.price }}#}
+{#                                    <div class="d-grid gap-2 d-md-block">#}
+{#                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">#}
+{#                                            Add to basket#}
+{#                                        </a>#}
+{#                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">#}
+{#                                            Add to basket#}
+{#                                        </a>#}
+{#                                    </div>#}
+{##}
+{#                                </a>#}
+                                <a class="btn btn-warning" href="{% url 'details product' product.id%}">Details</a>
                             </div>
 
                         </div>

@@ -1,0 +1,8 @@
+{% extends 'grocery/shared/base.html' %}
+
+{% block site-content %}
+    <div class="container">
+        <a href="{% url 'edit product' product.id %}" class="btn btn-warning mt-2">Edit</a>
+
+    </div>
+{% endblock %}
