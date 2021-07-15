@@ -37,14 +37,14 @@ def add_product(request):
 
     return render(request, 'grocery/add-product.html', context)
 
-
-def details_product(request, pk):
-    product = Product.objects.get(pk=pk)
-
-    context = {
-        'product': product,
-    }
-    return render(request, 'grocery/product-details.html', context)
+#
+# def details_product(request, pk):
+#     product = Product.objects.get(pk=pk)
+#
+#     context = {
+#         'product': product,
+#     }
+#     return render(request, 'grocery/product-details.html', context)
 
 
 def edit_product(request, pk):

@@ -39,9 +39,13 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'add product' %}">Add Product</a></li>
                 <li class="nav-item"><a class="nav-link" href="/">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-warning text-dark me-2" href="pricing.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-light text-dark" href="faq.html">Register</a></li>
-
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">Hello, {{ request.user }}</li>
+                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark me-2" href="{% url 'sign out' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark me-2" href="{% url 'sign in' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-light text-dark" href="{% url 'sign up' %}">Register</a></li>
+                {% endif %}
 
             </ul>
         </div>
