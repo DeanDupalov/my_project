@@ -4,10 +4,11 @@
 {% block site-content %}
     <h1 class="text-center">Register</h1>
     <div class="row d-flex justify-content-center">
-        <form method="post" class="form-control"> enctype="multipart/form-data" action="{% url 'sign up' %}">
+        <form method="post" class="form-control" action="{% url 'sign up' %}">
             {% csrf_token %}
             {{ form }}
-
+            {{ profile_form }}
+            {{ form.errors }}
 
             <button type="submit" class="btn btn-primary">Submit</button>
 

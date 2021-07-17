@@ -2,23 +2,40 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 
-from grocery_store.grocery_auth.forms import SignInForm
+from grocery_store.grocery_auth.forms import SignInForm, SignUpForm
+from grocery_store.profiles.forms import ProfileForm
 
 
-def sign_up(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('sign in')
-    else:
-        form = UserCreationForm()
+class RegisterView(TemplateView):
+    template_name = 'grocery/auth/sign_up.html'
 
-    context = {
-        'form': form,
-    }
-    return render(request, 'grocery/auth/sign_up.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['form'] = SignUpForm()
+        context['profile_form'] = ProfileForm()
+
+        return context
+
+    def post(self, request):
+        form = SignUpForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            login(request, user)
+
+            return redirect('landing page')
+
+        context = {
+            'form': SignUpForm(),
+            'profile_form': ProfileForm(),
+        }
+        return render(request, 'grocery/auth/sign_up.html', context)
 
 
 def sign_in(request):

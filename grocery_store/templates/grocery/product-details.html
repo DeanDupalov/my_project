@@ -1,8 +1,27 @@
 {% extends 'grocery/shared/base.html' %}
 
 {% block site-content %}
-    <div class="container">
-        <a href="{% url 'edit product' product.id %}" class="btn btn-warning mt-2">Edit</a>
+    <section class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">{{ product.name }}</h1>
+            </div>
+            <div class="position-relative mb-5">
+                <img class="img-fluid rounded-1 mb-3"
+                     src="{{ product.image.url }}"
+                     alt="product image"/>
+                <article>
+                    <h4>Description:</h4>
+                    <p class="lead fw-normal text-muted mb-0">{{ product.description }}</p>
+                </article>
+                <div class="container">
+                    <span class="fw-bolder">Price</span>
+                    <span class="lead fw-normal text-muted mb-0">{{ product.price }}$</span>
+                </div>
 
-    </div>
+                <a class="btn btn-warning" href="{% url 'edit product' product.id %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'delete product' product.id %}">Delete</a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

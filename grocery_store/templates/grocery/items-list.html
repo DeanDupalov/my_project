@@ -4,32 +4,22 @@
     <section class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
-                <h1 class="fw-bolder">Our Work</h1>
-                <p class="lead fw-normal text-muted mb-0">Company portfolio</p>
+                <h1 class="fw-bolder">All Items</h1>
+                <p class="lead fw-normal text-muted mb-0">In stock</p>
             </div>
             {% if products %}
                 <div class="row gx-5">
                     {% for product in products %}
                         <div class="col-md-3">
-
                             <div class="position-relative mb-5">
                                 <img class="img-fluid rounded-3 mb-3"
                                      src="{{ product.image.url }}"
                                      alt="..."/>
-{#                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">#}
-{#                                    {{ product.name }}#}
-{#                                    {{ product.price }}#}
-{#                                    <div class="d-grid gap-2 d-md-block">#}
-{#                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">#}
-{#                                            Add to basket#}
-{#                                        </a>#}
-{#                                        <a class="nav-link btn btn-primary text-dark me-2" href="pricing.html">#}
-{#                                            Add to basket#}
-{#                                        </a>#}
-{#                                    </div>#}
-{##}
-{#                                </a>#}
-                                <a class="btn btn-warning" href="#">Details</a>
+                                <div>
+                                    <p class="h4 fw-bolder link-dark ">{{ product.name }}</p>
+                                    <p class="h4 fw-bolder link-dark ">{{ product.price }}$</p>
+                                </div>
+                                <a class="btn btn-warning" href="{% url 'product details' product.id %}">Details</a>
                             </div>
 
                         </div>

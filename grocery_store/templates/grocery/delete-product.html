@@ -1,0 +1,22 @@
+{% extends 'grocery/shared/base.html' %}
+
+{% block site-content %}
+    <div class="container px-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xxl-6">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder mb-3">You are going to delete this product!</h1>
+                    <p class="lead fw-normal text-muted mb-4">Are you sure?</p>
+                    <div class="m-2">
+                        <form method="post" {% url 'delete product' product.id %}>
+                            {% csrf_token %}
+
+                            <button class="btn btn-danger btn-lg">Confirm</button>
+                        </form>
+                    </div>
+                    <a class="btn btn-primary btn-lg" href="{% url 'product details' product.id %}">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} %}

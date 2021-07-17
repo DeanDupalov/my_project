@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from grocery_store.grocery_auth.models import GroceryUser
+
+admin.site.register(GroceryUser)
