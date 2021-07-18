@@ -1,5 +1,6 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-success ">
+
     <div class="container px-5">
         <a class="navbar-brand" href="index.html">
             <img src="{% static 'images/logo/logo.png' %}" alt="Grocery Store" width="320" height="110">
@@ -10,43 +11,57 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="{% url 'landing page' %}">Home</a></li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button"
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                        <li><a class="dropdown-item " href="#">Bakery</a></li>
-                        <li><a class="dropdown-item" href="#">Fruits</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Vegetables</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Meat</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Rice And Pasta</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Fish and Seafood</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Oils, Vinegar and Dried Herbs</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Bear, Wine and Spirits</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Soft Drinks</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Crisps, Snacks and Nuts</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Chocolate and Sweets</a></li>
+                        {% if categories %}
+                            {% for category in categories %}
+                                <li class="nav-item dropdown"><a class="dropdown-item"
+                                       href="{% url 'list category products' category.id %}">{{ category.type }}</a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li><a class="dropdown-item" href="#">No categories</a></li>
+                        {% endif %}
                     </ul>
+
                 </li>
-{#                <li class="nav-item dropdown">#}
-{#                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button"#}
-{#                       data-bs-toggle="dropdown" aria-expanded="false">Products</a>#}
-{#                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">#}
-{#                        <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>#}
-{#                        <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
+                {#                <li class="nav-item dropdown">#}
+                {#                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button"#}
+                {#                       data-bs-toggle="dropdown" aria-expanded="false">Products</a>#}
+                {#                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">#}
+                {#                        <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>#}
+                {#                        <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>#}
+                {#                    </ul>#}
+                {#                </li>#}
 
                 <li class="nav-item"><a class="nav-link" href="{% url 'add product' %}">Add Product</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'list products' %}">All Products</a></li>
-                <li class="nav-item"><a class="nav-link" href="/">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                {% if request.user.is_authenticated %}
 
-                    <li class="nav-item nav-link text-capitalize">Hello, {{ request.user.profile.first_name }}</li>
-                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark" href="{% url 'sign out' %}">Logout</a></li>
+
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
+
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                            <li class="dropdown-item">Hello, {{ request.user }}</li>
+                            <li><a class="dropdown-item " href="#">Account Settings</a></li>
+                            <li><a class="dropdown-item " href="{% url 'sign out' %}">Logout</a></li>
+
+                        </ul>
+                    </li>
+
                 {% else %}
-                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark me-2" href="{% url 'sign in' %}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-light text-dark" href="{% url 'sign up' %}">Register</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark me-2" href="{% url 'sign in' %}">Login</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link btn btn-light text-dark"
+                                            href="{% url 'sign up' %}">Register</a></li>
                 {% endif %}
 
             </ul>

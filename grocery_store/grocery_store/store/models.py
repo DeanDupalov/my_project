@@ -3,17 +3,17 @@ from django.db import models
 
 # Create your models here.
 class Category(models.Model):
-    BAKERY = 'bakery'
-    FRUITS = 'fruits'
-    VEGETABLES = 'vegetables'
-    MEAT = 'meat'
-    RICE_AND_PASTA = 'rice and pasta'
-    FISH_AND_SEAFOOD = 'fish and seafood'
-    OILS_VINEGAR_AND_DRIED_HERBS = 'oils, vinegar and dried herbs'
-    BEER_WINE_AND_SPIRITS = 'bear, wine and spirits'
-    SOFT_DRINKS = 'soft drinks'
-    CRISPS_SNACKS_AND_NUTS = 'crisps, snacks and nuts'
-    CHOCOLATE_AND_SWEETS = 'chocolate and sweets'
+    BAKERY = 'Bakery'
+    FRUITS = 'Fruits'
+    VEGETABLES = 'Vegetables'
+    MEAT = 'Meat'
+    RICE_AND_PASTA = 'Rice and Pasta'
+    FISH_AND_SEAFOOD = 'Fish and Seafood'
+    OILS_VINEGAR_AND_DRIED_HERBS = 'Oils, Vinegar and Dried herbs'
+    BEER_WINE_AND_SPIRITS = 'Bear, Wine and Spirits'
+    SOFT_DRINKS = 'Soft drinks'
+    CRISPS_SNACKS_AND_NUTS = 'Crisps, Snacks and Nuts'
+    CHOCOLATE_AND_SWEETS = 'Chocolate and Sweets'
     UNKNOWN = 'unknown'
 
     CATEGORY_TYPES = (

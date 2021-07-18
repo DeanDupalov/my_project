@@ -18,9 +18,12 @@
                     <span class="fw-bolder">Price</span>
                     <span class="lead fw-normal text-muted mb-0">{{ product.price }}$</span>
                 </div>
-
-                <a class="btn btn-warning" href="{% url 'edit product' product.id %}">Edit</a>
-                <a class="btn btn-danger" href="{% url 'delete product' product.id %}">Delete</a>
+                {% if can_edit %}
+                    <a class="btn btn-warning" href="{% url 'edit product' product.id %}">Edit</a>
+                {% endif %}
+                {% if can_delete %}
+                    <a class="btn btn-danger" href="{% url 'delete product' product.id %}">Delete</a>
+                {% endif %}
             </div>
         </div>
     </section>

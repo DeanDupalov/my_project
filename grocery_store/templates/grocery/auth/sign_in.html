@@ -1,17 +1,17 @@
-{% extends 'grocery/shared/base.html'%}
+{% extends 'grocery/shared/base.html' %}
 
 
-{% block site-content%}
-    <h1 class="text-center">Login</h1>
-    <div class="row d-flex justify-content-center">
-        <form method="post" class="form-control" action="{% url 'sign in' %}">
-            {% csrf_token %}
-            {{ form }}
+{% block site-content %}
+    <div class="container">
+        <h1 class="text-center">Login</h1>
+        <div class="row d-flex justify-content-center m-5">
 
+            <form method="post" class="form-control" action="{% url 'sign in' %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary mt-3">Log in</button>
+            </form>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-        </form>
-
+        </div>
     </div>
 {% endblock %}

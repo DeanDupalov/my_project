@@ -1,7 +1,7 @@
 {% extends 'grocery/shared/base.html' %}
 
 {% block site-content %}
-    <div class="container-sm">
+    <div class="container mt-3 m">
         <form method="POST" action="{% url 'add product' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}

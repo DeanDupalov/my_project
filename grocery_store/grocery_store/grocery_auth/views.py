@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 
 from grocery_store.grocery_auth.forms import SignInForm, SignUpForm
 from grocery_store.profiles.forms import ProfileForm
+from grocery_store.store.models import Category
 
 
 class RegisterView(TemplateView):
@@ -16,6 +17,7 @@ class RegisterView(TemplateView):
 
         context['form'] = SignUpForm()
         context['profile_form'] = ProfileForm()
+        context['categories'] = Category.objects.all()
 
         return context
 
@@ -32,10 +34,11 @@ class RegisterView(TemplateView):
             return redirect('landing page')
 
         context = {
+            'categories': Category.objects.all(),
             'form': SignUpForm(),
             'profile_form': ProfileForm(),
         }
-        return render(request, 'grocery/auth/sign_up.html', context)
+        return render(request, 'grocery/auth/sign_up.html', context )
 
 
 def sign_in(request):
@@ -50,6 +53,7 @@ def sign_in(request):
         form = SignInForm()
 
     context = {
+        'categories': Category.objects.all(),
         'form': form,
     }
 

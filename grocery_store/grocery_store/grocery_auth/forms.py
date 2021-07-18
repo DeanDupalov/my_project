@@ -2,16 +2,25 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
+from core.mixins.bootstrap_form import BootstrapFormMixin
+
 UserModel = get_user_model()
 
 
-class SignUpForm(UserCreationForm):
+class SignUpForm(UserCreationForm, BootstrapFormMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setup_form()
     class Meta:
         model = UserModel
         fields = ('email',)
 
 
-class SignInForm(forms.Form):
+class SignInForm(forms.Form, BootstrapFormMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setup_form()
+
     user = None
     email = forms.EmailField()
 
