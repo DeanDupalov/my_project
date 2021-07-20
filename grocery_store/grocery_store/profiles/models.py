@@ -12,7 +12,6 @@ class Profile(models.Model):
         max_length=30,
     )
 
-
     user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success ">
 
     <div class="container px-5">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{% url 'landing page' %}">
             <img src="{% static 'images/logo/logo.png' %}" alt="Grocery Store" width="320" height="110">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -51,7 +51,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
                             <li class="dropdown-item">Hello, {{ request.user }}</li>
-                            <li><a class="dropdown-item " href="#">Account Settings</a></li>
+                            <li><a class="dropdown-item " href="{% url 'edit profile' %}">Edit Profile</a></li>
                             <li><a class="dropdown-item " href="{% url 'sign out' %}">Logout</a></li>
 
                         </ul>

@@ -1,0 +1,19 @@
+{% extends 'grocery/shared/base.html' %}
+
+
+{% block site-content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Edit Your Profile</h1>
+        <div class="row d-flex justify-content-center">
+            <form method="post" class="form-control w-50 m-auto" action="{% url 'edit profile' %}">
+                {% csrf_token %}
+                {{ user_form }}
+                {{ profile_form }}
+
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
+
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
