@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+
+from django.db import transaction
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
@@ -21,24 +22,26 @@ class RegisterView(TemplateView):
 
         return context
 
+    @transaction.atomic
     def post(self, request):
         form = SignUpForm(request.POST)
         profile_form = ProfileForm(request.POST)
+
         if form.is_valid() and profile_form.is_valid():
             user = form.save()
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
             login(request, user)
-
             return redirect('landing page')
 
         context = {
             'categories': Category.objects.all(),
             'form': SignUpForm(),
-            'profile_form': ProfileForm(),
+            'profile_form': ProfileForm()
+
         }
-        return render(request, 'grocery/auth/sign_up.html', context )
+        return render(request, 'grocery/auth/sign_up.html', context)
 
 
 def sign_in(request):
@@ -59,10 +62,6 @@ def sign_in(request):
 
     return render(request, 'grocery/auth/sign_in.html', context)
 
-
-# user = authenticate(username='dean', password='qwe123')
-# login(request, user)
-# return redirect('landing page')
 
 @login_required
 def sign_out(request):

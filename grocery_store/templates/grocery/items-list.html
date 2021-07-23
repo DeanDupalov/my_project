@@ -19,7 +19,8 @@
                                     <p class="h4 fw-bolder link-dark ">{{ product.name }}</p>
                                     <p class="h4 fw-bolder link-dark ">{{ product.price }}$</p>
                                 </div>
-                                <a class="btn btn-warning" href="{% url 'product details' product.id %}">Details</a>
+                                <a class="btn btn-success" href="{% url 'product details' product.id %}">Details</a>
+                                <a class="btn btn-warning" href="{% url 'add to cart' product.id %}">Add to basket</a>
                             </div>
 
                         </div>

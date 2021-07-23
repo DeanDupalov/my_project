@@ -14,13 +14,7 @@ class ProfileForm(forms.ModelForm, BootstrapFormMixin):
 
     class Meta:
         model = Profile
-        exclude = ('user',)
+        exclude = ('user', 'products')
 
 
-class EditProfileForm(ModelForm):
 
-    class Meta:
-        model = GroceryUser
-        fields = (
-            'email',
-        )

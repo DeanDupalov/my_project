@@ -9,4 +9,5 @@ urlpatterns = [
     path('auth/', include('grocery_store.grocery_auth.urls')),
     path('', include('grocery_store.store.urls')),
     path('profiles/', include('grocery_store.profiles.urls')),
+    path('cart/', include('grocery_store.cart.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,12 @@
+{% extends 'grocery/shared/base.html' %}
+
+
+{% block site-content %}
+    <div class="container w-50 m-auto ">
+        <h1>Hello, {{ profile.first_name }} {{ profile.surname }}!</h1>
+        <h5>This are your profile</h5>
+
+        <a class="btn btn-warning" href="{% url 'edit profile' %}">Edit</a>
+    </div>
+
+{% endblock %}

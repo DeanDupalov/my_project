@@ -7,8 +7,6 @@ from grocery_store.store.forms import ProductCreateForm
 from grocery_store.store.models import Category, Product
 
 
-
-
 def index(request):
     context = {
         'categories': Category.objects.all(),
@@ -53,7 +51,7 @@ def add_product(request):
         'form': form,
     }
 
-    return render(request, 'grocery/add-product.html', context)
+    return render(request, 'grocery/product/add-product.html', context)
 
 
 @login_required
@@ -66,18 +64,18 @@ def product_details(request, pk):
         'can_edit': request.user.has_perm('auth.change_product'),
         'can_delete': request.user.has_perm('auth.delete_product'),
     }
-    return render(request, 'grocery/product-details.html', context)
+    return render(request, 'grocery/product/product-details.html', context)
 
 
 @login_required
 def edit_product(request, pk):
     product = Product.objects.get(pk=pk)
     if request.method == 'POST':
-        old_image = product.image
+        # old_image = product.image
         form = ProductCreateForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
-            if old_image:
-                clean_image_files(old_image.path)
+            # if old_image:
+            #     clean_image_files(old_image.path)
             form.save()
             return redirect('product details', pk)
     else:
@@ -89,7 +87,7 @@ def edit_product(request, pk):
         'product': product,
     }
 
-    return render(request, 'grocery/edit-product.html', context)
+    return render(request, 'grocery/product/edit-product.html', context)
 
 
 @login_required
@@ -102,7 +100,7 @@ def delete_products(request, pk):
             'product': product,
         }
 
-        return render(request, 'grocery/delete-product.html', context)
+        return render(request, 'grocery/product/delete-product.html', context)
 
     else:
         product.delete()

@@ -1,12 +1,12 @@
 {% extends 'grocery/shared/base.html' %}
 
 {% block site-content %}
-    <div class="container-sm">
+    <div class="container w-50 mt-4 mb-4">
         <form method="POST" action="{% url 'edit product' product.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
 
-            <button class="btn btn-primary mt-2" type="submit">Done</button>
+            <button class="btn btn-primary mt-2" type="submit">Update</button>
         </form>
     </div>
 {% endblock %}

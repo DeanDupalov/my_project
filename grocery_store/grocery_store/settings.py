@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'grocery_store.grocery_auth',
     'grocery_store.profiles',
     'grocery_store.store',
+    'grocery_store.cart',
 
 ]
 

@@ -21,3 +21,6 @@ class GroceryUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = GroceryUserManager()
+
+
+from .signals import *
