@@ -39,13 +39,10 @@ def edit_profile(request):
 @login_required
 def profile_details(request):
     profile = Profile.objects.get(pk=request.user.pk)
-    profile_orders = Order.objects.filter(
-        owner=profile,
-    )
+
     context = {
         'grocery_user': request.user,
         'profile': profile,
-        'profile_orders': profile_orders,
     }
 
     return render(request, 'grocery/profile/profile_details.html', context)

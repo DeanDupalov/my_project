@@ -3,81 +3,71 @@
 
 {% block site-content %}
 
-    <div class="container">
-        {% if order %}
-            <ul>
-                {% for item in order %}
-                    <li>{{ item.product.name }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h3>Empty Basket</h3>
-        {% endif %}
+    <main>
+        <div class="container mt-4">
+
+            <div class="table-responsive text-nowrap">
+                <h2>Order Summary</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Item Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order_item in object.items.all %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ order_item.item.name }}</td>
+                            <td>{{ order_item.item.price }}</td>
+                            <td>
+                                <a href="{% url 'delete item from cart' order_item.item.id %}"><i
+                                        class="fas fa-minus mr-2"></i></a>
+                                {{ order_item.quantity }}
+                                <a href="{% url 'add to cart' order_item.item.id %}"><i
+                                        class="fas fa-plus ml-2"></i></a>
+                            </td>
+                            <td>
+
+                                {{ order_item.get_total_item_price }}
+                                <a style='color: red;' href="{% url 'delete item from cart' order_item.item.id %}">
+                                    <i class="fas fa-trash float-right"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan='5'>Your cart is empty</td>
+                        </tr>
+{#                        <tr>#}
+{#                            <td colspan="5">#}
+{#                                <a class='btn btn-primary float-right' href=''>Continue shopping</a>#}
+{#                            </td>#}
+{#                        </tr>#}
+
+                    {% endfor %}
 
 
-    </div>
-    {#    <section class="container w-75 mt-4">#}
-    {#        <div class="row">#}
-    {#            <table class="table table-hover table-bordered text-center">#}
-    {#                <tr class="text-center">#}
-    {#                    <th>no.</th>#}
-    {#                    <th>Item</th>#}
-    {#                    <th>Price</th>#}
-    {#                </tr>#}
-    {#                {% for item in order.get_cart_item %}#}
-    {#                    <tr>#}
-    {#                        <td>{{ forloop.counter }}</td>#}
-    {#                        <td>#}
-    {#                            {{ item.product.name }}#}
-    {#                            <span class="pull-right">#}
-    {#              <a href="{% url 'delete item from cart' item.id %}" data-balloon="remove this item from cart"#}
-    {#                 class="text-danger" onclick="return confirm_delete();">#}
-    {#                <i class="fas fa-trash"></i>#}
-    {#              </a>#}
-    {#            </span>#}
-    {#                        </td>#}
-    {#                        <td>{{ item.product.price }}</td>#}
-    {#                    </tr>#}
-    {#                {% empty %}#}
-    {#                    <tr>#}
-    {#                        <td colspan=3> You have not added any items yet.</td>#}
-    {#                    </tr>#}
-    {#                {% endfor %}#}
-    {#                <tr>#}
-    {#                    {% if order.get_cart_total != None %}#}
-    {#                        <td colspan=2>#}
-    {#                            <strong class="pull-right">Order Total:</strong>#}
-    {#                        </td>#}
-    {##}
-    {#                        <td colspan=1>#}
-    {#                            $<strong>{{ order.get_cart_total }}</strong>#}
-    {#                        </td>#}
-    {#                    {% endif %}#}
-    {#                </tr>#}
-    {#                <tr>#}
-    {#                    <td colspan=1>#}
-    {#                        <a href="{% url 'list products' %}" class="btn btn-warning pull-left">#}
-    {#                            {% if order %}Continue Shopping{% else %}Add Items to Cart {% endif %}#}
-    {#                        </a>#}
-    {#                    </td>#}
-    {#                    <td colspan=2>#}
-    {#                        {% if order.get_cart_items %}#}
-    {#                        <a href="{% url '#' %}" class="pull-right btn btn-primary">Proceed To#}
-    {#                                Checkout</a>#}
-    {#                        {% endif %}#}
-    {#                    </td>#}
-    {#                </tr>#}
-    {#            </table>#}
-    {##}
-    {#        </div>#}
-    {#    </section>#}
-    {##}
-    {##}
-    {##}
-    {#    #}
-    {#    <script>#}
-    {#        function confirm_delete() {#}
-    {#            return confirm("Do you want to remove this item from cart?");#}
-    {#        }#}
-    {#    </script>#}
+                        <tr>
+                            <td colspan="4"><b>Order Total</b></td>
+                            <td><b>${{ object.get_cart_total }}</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <a class='btn btn-warning float-right ml-2' href='/'>Proceed to checkout</a>
+                                <a class='btn btn-primary float-right' href='{% url "list products" %}'>Continue shopping</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </main>
 {% endblock %}

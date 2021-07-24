@@ -8,13 +8,17 @@ from grocery_store.store.models import Category, Product
 
 
 def index(request):
+    products = list(Product.objects.all())[-3:]
+
     context = {
         'categories': Category.objects.all(),
+        'products': products,
+
     }
     return render(request, 'grocery/index.html', context)
 
 
-def list_products(request):
+def list_all_products(request):
     products = Product.objects.all()
 
     context = {
