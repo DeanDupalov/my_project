@@ -6,21 +6,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from django.views import View
 
-
 from grocery_store.cart.models import Order, OrderItem
 from grocery_store.profiles.models import Profile
 from grocery_store.store.models import Product
 
 
-#
-# def get_user_pending_order(request):
-#     user_profile = get_object_or_404(Profile, user=request.user)
-#
-#     order = Order.objects.filter(owner=user_profile)
-#     if order.exists():
-#         return order[0]
-#
-#     return 0
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -33,6 +23,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
+
 
 @login_required()
 def add_to_cart(request, pk):
@@ -69,7 +60,7 @@ def add_to_cart(request, pk):
 
 
 @login_required()
-def delete_from_cart(request, pk):
+def delete_one_from_cart(request, pk):
     item = get_object_or_404(Product, pk=pk)
     user_profile = get_object_or_404(Profile, user=request.user)
 
@@ -98,6 +89,29 @@ def delete_from_cart(request, pk):
         messages.info(request, "You do not have an active order")
         return redirect('list products')
 
+@login_required()
+def delete_from_cart(request, pk):
+    item = get_object_or_404(Product, pk=pk)
+    user_profile = get_object_or_404(Profile, user=request.user)
 
+    order_qs = Order.objects.filter(
+        user=user_profile,
+        ordered=False,
+    )
+    if order_qs.exists():
+        order = order_qs[0]
 
+        order_item = OrderItem.objects.filter(
+            item=item,
+            user=user_profile,
+            ordered=False,
+        )[0]
+        order_item.quantity = 1
+        order_item.save()
+        order.items.remove(order_item)
+        messages.info(request, "This item was removed.")
+        return redirect("order details")
 
+    else:
+        messages.info(request, "You do not have an active order")
+        return redirect('list products')

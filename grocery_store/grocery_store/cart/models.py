@@ -25,7 +25,7 @@ class OrderItem(models.Model):
 
 
 class Order(models.Model):
-    ref_code = models.CharField(max_length=15, blank=True, null=True)
+    # ref_code = models.CharField(max_length=15, blank=True, null=True)
     user = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
@@ -41,7 +41,6 @@ class Order(models.Model):
         for order_item in self.items.all():
             result += order_item.get_total_item_price()
         return result
-        # return sum([order_item.get_total_item_price for order_item in self.items.all()])
 
     def __str__(self):
-        return '{0} - {1}'.format(self.user, self.ref_code)
+        return f"{self.user} - {self.user_id}"

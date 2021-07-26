@@ -25,7 +25,7 @@
                             <td>{{ order_item.item.name }}</td>
                             <td>{{ order_item.item.price }}</td>
                             <td>
-                                <a href="{% url 'delete item from cart' order_item.item.id %}"><i
+                                <a href="{% url 'delete one item from cart' order_item.item.id %}"><i
                                         class="fas fa-minus mr-2"></i></a>
                                 {{ order_item.quantity }}
                                 <a href="{% url 'add to cart' order_item.item.id %}"><i
