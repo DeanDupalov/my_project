@@ -25,3 +25,26 @@ class Profile(models.Model):
     def __str__(self):
         return self.first_name
 
+
+ADDRESS_CHOICES = (
+    ('B', 'Billing'),
+    ('S', 'Shipping'),
+)
+
+
+class ProfileAddress(models.Model):
+    profile = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE)
+    street_address = models.CharField(max_length=100, blank=True)
+    apartment_address = models.CharField(max_length=100, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    zip = models.CharField(max_length=100, blank=True)
+    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES, blank=True)
+
+
+    def __str__(self):
+        return f"{self.profile.first_name} {self.profile.first_name}"
+
+    class Meta:
+        verbose_name_plural = 'Addresses'

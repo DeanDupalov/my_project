@@ -43,7 +43,7 @@ class Product(models.Model):
         max_digits=10,
         decimal_places=2,
         verbose_name="price",
-        validators=[MinValueValidator(0.0)]
+        validators=[MinValueValidator(0.0)],
     )
     description = models.TextField()
     image = models.ImageField(upload_to='products')
@@ -54,6 +54,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DiscountProduct(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    new_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0.0)],
+    )
+
+    def __str__(self):
+        return self.product.name
 
 
 class Like(models.Model):

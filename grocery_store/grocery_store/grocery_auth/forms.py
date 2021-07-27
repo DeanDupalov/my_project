@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from core.mixins.bootstrap_form import BootstrapFormMixin
 
@@ -40,3 +40,20 @@ class SignInForm(forms.Form, BootstrapFormMixin):
 
     def save(self):
         return self.user
+
+
+class EditUserForm(UserChangeForm, BootstrapFormMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setup_form()
+
+    class Meta:
+        model = UserModel
+        fields = ('email',)
+
+
+class InfoUserForm(EditUserForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for (_, field) in self.fields.items():
+            field.widget.attrs['disabled'] = 'disabled'

@@ -1,7 +1,7 @@
 from django.urls import path
 
-from grocery_store.store.views import edit_product, delete_products, product_details, \
-    list_category_products, IndexView, ListAllProductsView, AddProduct, contact_view
+from grocery_store.store.views import edit_product, delete_products, \
+    list_category_products, IndexView, ListAllProductsView, AddProduct, contact_view, product_details
 
 urlpatterns = [
     path('', IndexView.as_view(), name='landing page'),

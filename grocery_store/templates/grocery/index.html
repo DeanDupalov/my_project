@@ -3,7 +3,43 @@
 {% block site-content %}
     {% include 'grocery/partials/header.html' %}
     <!-- Blog preview section-->
+    <section class="py-1">
+        <div class="container px-5 my-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="text-center">
+                        <h1 class="fw-bolder">Latest Offers</h1>
+                        <p class="lead fw-normal text-muted mb-5"></p>
+                    </div>
+                </div>
+            </div>
+            {% if discounted_products %}
+                <div class="row gx-5">
+                {% for dp in discounted_products %}
+                        <div class="col-md-2 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <div class="badge bg-danger bg-gradient rounded-pill mb-2">OFFER</div>
+                                <img class="card-img-top" src="{{ dp.product.image.url }}" alt="..."/>
+                                <div class="card-body p-4">
 
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'product details' dp.product.id %}"><h5
+                                            class="card-title mb-3">{{ dp.product.name }}</h5></a>
+{#                                    <p class="card-text mb-0">{{ dp.product.category }}</p>#}
+                                    <p>Old Price: <span class="text-decoration-line-through">{{ dp.product.price }}$</span></p>
+                                    <p class="fw-bolder mb-0">New Price: <span class="text-danger text-center">{{ dp.new_price }}$</span></p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <p>No Products</p>
+            {% endif %}
+
+        </div>
+    </section>
     <section class="py-1">
         <div class="container px-5 my-5">
             <div class="row gx-5 justify-content-center">

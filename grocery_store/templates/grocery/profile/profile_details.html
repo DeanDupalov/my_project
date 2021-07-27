@@ -2,11 +2,20 @@
 
 
 {% block site-content %}
-    <div class="container w-50 m-auto ">
-        <h1>Hello, {{ profile.first_name }} {{ profile.surname }}!</h1>
-        <h5>This are your profile</h5>
+    <div class="container w-50 m-auto mt-5">
+        <div class="card h-100 shadow border-0">
+            <h2 class="text-center text-decoration-underline">Your Profile</h2>
+            <div class="text-center h4 mt-2">First name: <span
+                    class="text-center h4 fw-bolder mt-2">{{ profile.first_name }}</span></div>
+            <div class="text-center h4 mt-2">Surname: <span
+                    class="text-center h4 fw-bolder mt-2">{{ profile.surname }}</span></div>
 
-        <a class="btn btn-warning" href="{% url 'edit profile' %}">Edit</a>
+            <div class="text-center h4 mt-2">Email address: <span
+                    class="text-center h4 fw-bolder mt-2">{{ grocery_user.email }}</span></div>
+
+            <a class="btn btn-warning mt-2" href="{% url 'edit profile' %}">Edit</a>
+        </div>
+
     </div>
 
 {% endblock %}

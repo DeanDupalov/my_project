@@ -2,7 +2,7 @@
 
 
 {% block site-content %}
-    <div class="container w-50 m-auto">
+    <div class="container w-50 m-auto mt-3">
         <h1 class="text-center">Edit Your Profile</h1>
         <div class="row d-flex justify-content-center">
             <form method="post" class="form-control w-50 m-auto" action="{% url 'edit profile' %}">
@@ -11,6 +11,7 @@
                 {{ profile_form }}
 
                 <button type="submit" class="btn btn-primary mt-2">Save</button>
+                <a class="btn btn-warning mt-2" href="{% url 'change password' %}">Change Password</a>
 
             </form>
 

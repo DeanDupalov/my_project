@@ -18,7 +18,6 @@
                         <div class="d-flex align-items-center">
 
                             <div class="small">
-
                                 {% if can_edit %}
                                     <a class="btn btn-warning" href="{% url 'edit product' product.id %}">Edit</a>
                                 {% endif %}
@@ -34,34 +33,5 @@
         </div>
     </div>
 
-    {#    <section class="py-1">#}
-    {#        <div class="container w-50 m-auto px-5 my-2">#}
-    {#            <div class="text-center m-0">#}
-    {#                <h1 class="fw-bolder">{{ product.name }}</h1>#}
-    {#            </div>#}
-    {#            <div class="position-relative mb-1">#}
-    {#                <img class="img-fluid rounded-1 mb-1"#}
-    {#                     src="{{ product.image.url }}"#}
-    {#                     alt="product image"/>#}
-    {#                <article>#}
-    {#                    <h4>Description:</h4>#}
-    {#                    <p class="lead fw-normal text-muted mb-0">{{ product.description }}</p>#}
-    {#                </article>#}
-    {#                <div class="container">#}
-    {#                    <span class="fw-bolder">Price</span>#}
-    {#                    <span class="lead fw-normal text-muted mb-0">{{ product.price }}$</span>#}
-    {#                </div>#}
-    {#                {% if can_edit %}#}
-    {#                    <a class="btn btn-warning" href="{% url 'edit product' product.id %}">Edit</a>#}
-    {#                {% endif %}#}
-    {#                {% if can_delete %}#}
-    {#                    <a class="btn btn-danger" href="{% url 'delete product' product.id %}">Delete</a>#}
-    {#                {% endif %}#}
-    {##}
-    {##}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {##}
-    {#    </section>#}
+
 {% endblock %}

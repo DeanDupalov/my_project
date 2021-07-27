@@ -7,11 +7,11 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView
 
 from core.clen_up import clean_image_files
 from grocery_store.store.forms import ProductCreateForm, ContactForm
-from grocery_store.store.models import Category, Product
+from grocery_store.store.models import Category, Product, DiscountProduct
 
 
 class IndexView(TemplateView):
@@ -23,7 +23,7 @@ class IndexView(TemplateView):
         return {
             'categories': Category.objects.all(),
             'products': products,
-
+            'discounted_products': DiscountProduct.objects.all(),
         }
 
 
@@ -36,6 +36,8 @@ class ListAllProductsView(ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
+
+
 
 
 def list_category_products(request, pk):
@@ -58,24 +60,6 @@ class ListCategoryProductsView(ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
-
-
-# @login_required
-# def add_product(request):
-#     if request.method == 'POST':
-#         form = ProductCreateForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('list products')
-#     else:
-#         form = ProductCreateForm()
-#
-#     context = {
-#         'categories': Category.objects.all(),
-#         'form': form,
-#     }
-#
-#     return render(request, 'grocery/product/add-product.html', context)
 
 
 class AddProduct(LoginRequiredMixin, CreateView):
@@ -142,6 +126,7 @@ def delete_products(request, pk):
         product.delete()
         return redirect('list products')
 
+
 @login_required
 def contact_view(request):
     if request.method == 'GET':
@@ -171,5 +156,3 @@ def contact_view(request):
     }
 
     return render(request, 'grocery/contact.html', context)
-
-
