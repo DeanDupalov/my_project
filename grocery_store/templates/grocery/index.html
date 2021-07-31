@@ -26,7 +26,7 @@
                                             class="card-title mb-3">{{ dp.product.name }}</h5></a>
 {#                                    <p class="card-text mb-0">{{ dp.product.category }}</p>#}
                                     <p>Old Price: <span class="text-decoration-line-through">{{ dp.product.price }}$</span></p>
-                                    <p class="fw-bolder mb-0">New Price: <span class="text-danger text-center">{{ dp.new_price }}$</span></p>
+                                    <p class="fw-bolder mb-0">New Price: <span class="text-danger text-center">{{ dp.price }}$</span></p>
 
                                 </div>
 
@@ -53,16 +53,15 @@
             {% if products %}
                 <div class="row gx-5">
                 {% for product in products %}
-
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
                                 <img class="card-img-top" src="{{ product.image.url }}" alt="..."/>
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">Category: {{ product.category }}</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'product details' product.id %}"><h5
-                                            class="card-title mb-3">{{ product.name }}</h5></a>
-                                    <p class="card-text mb-0">{{ product.description }}</p>
-                                    <p class="font-weight-bold mb-0">{{ product.price }}$</p>
+                                    <a class="textext-decoration-none link-dark stretched-link" href="{% url 'product details' product.id %}">
+                                        <h5 class="card-title mb-3">{{ product.name }}</h5></a>
+                                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'product details' product.id %}">
+                                        <h5 class="card-title mb-3">Details</h5></a>
                                 </div>
 
                             </div>

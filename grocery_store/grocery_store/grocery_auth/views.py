@@ -6,8 +6,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
 from grocery_store.grocery_auth.forms import SignInForm, SignUpForm
-from grocery_store.profiles.forms import ProfileForm
-from grocery_store.store.models import Category
+from grocery_store.product.models import Category
+from grocery_store.profiles.forms import ProfileForm, ProfileAddressForm
+
 
 
 class RegisterView(TemplateView):
@@ -32,6 +33,9 @@ class RegisterView(TemplateView):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+            address = ProfileAddressForm().save(commit=False)
+            address.profile = profile
+            address.save()
             login(request, user)
             return redirect('landing page')
 

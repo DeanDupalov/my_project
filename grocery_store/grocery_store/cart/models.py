@@ -1,9 +1,8 @@
-from django.conf import settings
 from django.db import models
 
-# Create your models here.
+from grocery_store.product.models import Product
 from grocery_store.profiles.models import Profile
-from grocery_store.store.models import Product
+
 
 
 class OrderItem(models.Model):
@@ -25,7 +24,6 @@ class OrderItem(models.Model):
 
 
 class Order(models.Model):
-    # ref_code = models.CharField(max_length=15, blank=True, null=True)
     user = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,

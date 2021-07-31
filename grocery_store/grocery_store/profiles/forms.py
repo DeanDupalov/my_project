@@ -1,8 +1,5 @@
 from django import forms
-from django.forms import ModelForm
-
 from core.mixins.bootstrap_form import BootstrapFormMixin
-from grocery_store.grocery_auth.models import GroceryUser
 from grocery_store.profiles.models import Profile, ProfileAddress
 
 
@@ -25,3 +22,10 @@ class ProfileAddressForm(forms.ModelForm, BootstrapFormMixin):
     class Meta:
         model = ProfileAddress
         exclude = ('profile',)
+
+
+class DisabledProfileAddressForm(ProfileAddressForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for (_, field) in self.fields.items():
+            field.widget.attrs['disabled'] = 'disabled'

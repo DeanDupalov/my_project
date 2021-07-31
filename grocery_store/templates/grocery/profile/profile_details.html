@@ -2,7 +2,7 @@
 
 
 {% block site-content %}
-    <div class="container w-50 m-auto mt-5">
+    <div class="container w-50 m-auto mt-5 mb-5">
         <div class="card h-100 shadow border-0">
             <h2 class="text-center text-decoration-underline">Your Profile</h2>
             <div class="text-center h4 mt-2">First name: <span
@@ -12,6 +12,11 @@
 
             <div class="text-center h4 mt-2">Email address: <span
                     class="text-center h4 fw-bolder mt-2">{{ grocery_user.email }}</span></div>
+            {#            <a class="btn btn-white h4 fw-bolder  mt-2" href="">See Your address details</a>#}
+            <div class="m-3 0 3 0">
+                <h3 class="text-center text-decoration-underline">Your Address</h3>
+                {{ address_form }}
+            </div>
 
             <a class="btn btn-warning mt-2" href="{% url 'edit profile' %}">Edit</a>
         </div>

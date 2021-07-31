@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-# Register your models here.
-from grocery_store.profiles.models import Profile
+from grocery_store.profiles.models import Profile, ProfileAddress
 
 admin.site.register(Profile)
+admin.site.register(ProfileAddress)

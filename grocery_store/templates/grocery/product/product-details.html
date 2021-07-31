@@ -1,7 +1,40 @@
 {% extends 'grocery/shared/base.html' %}
 
 {% block site-content %}
+    {% if is_discounted %}
     <div class="container w-75 m-auto">
+        <div class="col-lg-4 mx-auto mt-5 mb-5">
+            <div class="card h-100 shadow border-0">
+
+                <div class="text-center h2 fw-bolder mt-2">{{ product.product.name }}</div>
+                <img class="card-img-top" src="{{ product.product.image.url }}" alt="..."/>
+                <div class="card-body p-4">
+                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">Category: {{ product.product.category }}</div>
+
+                    <p class="card-text mb-0">{{ product.product.description }}</p>
+                    <p class="font-weight-bold mb-0">{{ product.price }}$</p>
+                </div>
+                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div class="d-flex align-items-end justify-content-between">
+                        <div class="d-flex align-items-center">
+
+                            <div class="small">
+                                {% if can_edit %}
+                                    <a class="btn btn-warning" href="{% url 'edit product' product.product.id %}">Edit</a>
+                                {% endif %}
+                                {% if can_delete %}
+                                    <a class="btn btn-danger" href="{% url 'delete product' product.product.id %}">Delete</a>
+                                {% endif %}
+                                <a class="btn btn-success" href="{% url 'add to cart' product.product.id %}">Add to basket</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="container w-75 m-auto">
         <div class="col-lg-4 mx-auto mt-5 mb-5">
             <div class="card h-100 shadow border-0">
 
@@ -20,6 +53,7 @@
                             <div class="small">
                                 {% if can_edit %}
                                     <a class="btn btn-warning" href="{% url 'edit product' product.id %}">Edit</a>
+                                    <a class="btn btn-warning" href="{% url 'add discounted product' %}">Add to Offers</a>
                                 {% endif %}
                                 {% if can_delete %}
                                     <a class="btn btn-danger" href="{% url 'delete product' product.id %}">Delete</a>
@@ -32,6 +66,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
 
 {% endblock %}

@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.urls import path
 
 from grocery_store.cart.views import add_to_cart, delete_one_from_cart, OrderSummaryView, delete_from_cart

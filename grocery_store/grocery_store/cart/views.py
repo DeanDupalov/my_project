@@ -7,8 +7,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 
 from grocery_store.cart.models import Order, OrderItem
+from grocery_store.product.models import Product
 from grocery_store.profiles.models import Profile
-from grocery_store.store.models import Product
+
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -88,6 +89,7 @@ def delete_one_from_cart(request, pk):
     else:
         messages.info(request, "You do not have an active order")
         return redirect('list products')
+
 
 @login_required()
 def delete_from_cart(request, pk):

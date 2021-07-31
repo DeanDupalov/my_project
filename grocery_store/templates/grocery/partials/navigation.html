@@ -20,7 +20,7 @@
                         {% if categories %}
                             {% for category in categories %}
                                 <li class="nav-item dropdown"><a class="dropdown-item"
-                                       href="{% url 'list category products' category.id %}">{{ category.type }}</a>
+                                                                 href="{% url 'list category products' category.id %}">{{ category.type }}</a>
                                 </li>
                             {% endfor %}
                         {% else %}
@@ -30,12 +30,11 @@
 
                 </li>
 
-
-                <li class="nav-item"><a class="nav-link" href="{% url 'add product' %}">Add Product</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'list products' %}">All Products</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'order details' %}"><i class="fas fa-shopping-cart"></i> Basket</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'order details' %}"><i
+                        class="fas fa-shopping-cart"></i> Basket</a></li>
 
 
                 {% if request.user.is_authenticated %}
@@ -45,10 +44,14 @@
 
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
                             <li class="dropdown-item">Hello, {{ request.user.profile.surname }}</li>
-                            <li><a class="dropdown-item " href="{% url 'order details' %}">Shopping List</a></li>
+                            {% if request.user.is_staff %}
+                                <li><a class="dropdown-item " href="#">Add Category</a></li>
+                                <li><a class="dropdown-item " href="{% url 'add product' %}">Add Product</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item " href="{% url 'order details' %}">Shopping List</a></li>
+                                <li><a class="dropdown-item " href="{% url 'contact' %}">Contact us</a></li>
+                            {% endif %}
                             <li><a class="dropdown-item " href="{% url 'profile details' %}">Profile Details</a></li>
-                            <li><a class="dropdown-item " href="{% url 'contact' %}">Contact us</a></li>
-
                             <li><a class="dropdown-item " href="{% url 'sign out' %}">Logout</a></li>
 
                         </ul>
