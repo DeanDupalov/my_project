@@ -2,13 +2,15 @@ Django Grocery Store
 
 Features Included
 
-Full CRUD
+-Full CRUD
 
-Shopping Cart
+-Shopping Cart/Chackout
 
-Extended Django user
+-Extended Django user
 
-Responsive, mobile-friendly design
+-Sending Cantact Messages
+
+-Responsive, mobile-friendly design
 
 Installation
 1.clone Repository & Install Packages
