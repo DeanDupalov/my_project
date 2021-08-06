@@ -6,6 +6,8 @@ Features Included
 
 -Shopping Cart/Chackout
 
+-Payment Logic Not Implemented
+
 -Extended Django user
 
 -Sending Cantact Messages
@@ -26,3 +28,7 @@ virtualenv env
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
+python manage.py createsuperuser
+
+4. Create Categories from admin pannel
+
