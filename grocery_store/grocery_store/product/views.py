@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView
 
 from grocery_store.product.forms import ProductCreateForm, DiscountProductForm
 from grocery_store.product.models import Product, Category, DiscountProduct
@@ -43,11 +43,8 @@ class AddProduct(LoginRequiredMixin, CreateView):
 def edit_product(request, pk):
     product = Product.objects.get(pk=pk)
     if request.method == 'POST':
-        # old_image = product.image
         form = ProductCreateForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
-            # if old_image:
-            #     clean_image_files(old_image.path)
             form.save()
             return redirect('product details', pk)
     else:

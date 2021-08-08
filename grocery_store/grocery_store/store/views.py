@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView
 
 from grocery_store.product.models import Product, Category, DiscountProduct
 from grocery_store.store.forms import ContactForm
@@ -66,10 +66,10 @@ def contact_view(request):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             messages.info(request, "Your message has been sent!")
-            return redirect('contact')
+            return redirect('landing page')
 
     context = {
-        'form': ContactForm(),
+        'form': form,
         'categories': Category.objects.all(),
     }
 

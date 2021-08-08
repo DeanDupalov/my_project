@@ -1,8 +1,6 @@
 from django.db import models
-
 from grocery_store.product.models import Product
 from grocery_store.profiles.models import Profile
-
 
 
 class OrderItem(models.Model):

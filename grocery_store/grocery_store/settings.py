@@ -134,6 +134,6 @@ AUTH_USER_MODEL = 'grocery_auth.GroceryUser'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'cantacts.groceryproject@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'sLlWFG29mZV4FwLyWQ18'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

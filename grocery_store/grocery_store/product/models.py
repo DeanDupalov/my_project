@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -41,15 +41,14 @@ class Product(models.Model):
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        verbose_name="price",
         validators=[MinValueValidator(0.0)],
     )
     description = models.TextField()
     image = models.ImageField(upload_to='product')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    created = models.DateTimeField(auto_now_add=True, verbose_name='created')
-    updated = models.DateTimeField(auto_now=True, verbose_name='updated')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -71,7 +70,4 @@ class DiscountProduct(models.Model):
         return self.product.name
 
 
-class Like(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    # test = models.CharField(max_length=3, default='foo')
-    # user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+

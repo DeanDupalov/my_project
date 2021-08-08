@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from grocery_store.product.models import Category, Product, DiscountProduct, Like
+from grocery_store.product.models import Category, Product, DiscountProduct
 
 
 @admin.register(Category)
@@ -17,8 +17,4 @@ class ProductAdmin(admin.ModelAdmin):
 class DiscountProductAdmin(admin.ModelAdmin):
     pass
 
-
-@admin.register(Like)
-class LikeAdmin(admin.ModelAdmin):
-    pass
 

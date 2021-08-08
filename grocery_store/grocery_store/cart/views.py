@@ -6,10 +6,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from django.views import View
 
-from grocery_store.cart.models import Order, OrderItem
-from grocery_store.product.models import Product
-from grocery_store.profiles.models import Profile
 
+from grocery_store.cart.forms import CheckoutForm
+from grocery_store.cart.models import Order, OrderItem
+from grocery_store.product.models import Product, Category, DiscountProduct
+from grocery_store.profiles.models import Profile, ProfileAddress
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -18,16 +19,18 @@ class OrderSummaryView(LoginRequiredMixin, View):
             user_profile = get_object_or_404(Profile, user=self.request.user)
             order = Order.objects.get(user=user_profile, ordered=False)
             context = {
-                'object': order
+                'object': order,
+                'categories': Category.objects.all(),
             }
             return render(self.request, 'grocery/cart/order_summary.html', context)
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
-            return redirect("/")
+            return redirect("landing page")
 
 
 @login_required()
 def add_to_cart(request, pk):
+
     item = Product.objects.get(pk=pk)
     user_profile = get_object_or_404(Profile, user=request.user)
 
@@ -117,3 +120,32 @@ def delete_from_cart(request, pk):
     else:
         messages.info(request, "You do not have an active order")
         return redirect('list products')
+
+
+class CheckoutView(View):
+
+    def get(self, *args, **kwargs):
+        profile = Profile.objects.get(pk=self.request.user.id)
+        try:
+            order = Order.objects.get(user=profile)
+            form = CheckoutForm()
+            context = {
+                'form': form,
+                'order': order,
+            }
+
+            shipping_address_qs = ProfileAddress.objects.filter(
+                profile=profile,
+            )
+            if shipping_address_qs.exists():
+                context.update(
+                    {'default_shipping_address': shipping_address_qs[0]})
+
+
+            return render(self.request, "grocery/cart/checkout.html", context)
+        except ObjectDoesNotExist:
+            messages.info(self.request, "You do not have an active order")
+            return redirect("profile details")
+
+    def post(self, *args, **kwargs):
+        pass

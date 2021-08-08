@@ -27,14 +27,20 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <h2>No Product TODO</h2>
+                <section class="py-5">
+                    <div class="container px-5 my-5">
+                        <h2 class="display-4 fw-bolder mb-4">Please Add Product</h2>
+                        <a class="btn btn-lg btn-primary" href="{% url 'add product' %}">Contact us</a>
+                    </div>
+                </section>
+
             {% endif %}
         </div>
     </section>
     <section class="py-5 bg-light">
         <div class="container px-5 my-5">
-            <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
-            <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
+            <h2 class="display-4 fw-bolder mb-4">How can we help you?</h2>
+            <a class="btn btn-lg btn-primary" href="{% url 'contact' %}">Contact us</a>
         </div>
     </section>
 {% endblock %}

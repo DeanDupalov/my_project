@@ -35,7 +35,12 @@
                 {% endfor %}
                 </div>
             {% else %}
-                <p>No Products</p>
+                <section class="py-5">
+                    <div class="container px-5 my-5">
+                        <h4 class=" fw-bolder mb-4">Please Add First Offer</h4>
+                        <a class="btn btn-lg btn-primary" href="{% url 'add discounted product' %}">Add Offer</a>
+                    </div>
+                </section>
             {% endif %}
 
         </div>
